@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="v1.3.2"
+VERSION="v1.3.3"
 DEFAULT_PORT="62015"
 DEFAULT_USER="danted"
 DEFAULT_PAWD="danted"
@@ -168,7 +168,10 @@ EOF
 /usr/bin/htpasswd -c -d -b /etc/danted/sockd.passwd ${DEFAULT_USER} ${DEFAULT_PAWD}
 
 cat > /etc/init.d/danted <<'EOF'
-#! /bin/bash
+#gedit /etc/init.d/danted
+#!/bin/bash
+# chkconfig: 2345 10 90 
+# description: danted ....
 ### BEGIN INIT INFO
 # Provides:          danted
 # Reprogarm:         airski
@@ -344,11 +347,12 @@ esac
 exit 0
 EOF
 chmod +x /etc/init.d/danted
-[ -n "$(grep CentOS /etc/issue)" ]  && chkconfig --add danted
-[ -n "$(grep -E 'Debian|Ubuntu' /etc/issue)" ] && update-rc.d danted defaults
+[ -n "$(grep -i CentOS /etc/issue)" ]  && chkconfig --add danted
+[ -n "$(egrep -i 'Debian|Ubuntu' /etc/issue)" ] && update-rc.d danted defaults
+uname -a | grep  -q  "x86_64" && cp /lib/security/pam_pwdfile.so /lib64/security/ >/dev/null
 rm /usr/bin/danted -f
 ln -s /etc/danted/sbin/sockd /usr/bin/danted
-service danted restart
+service danted start
 clear
 
 #Color Variable
