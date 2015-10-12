@@ -20,10 +20,6 @@
 <li>7. 完美支持Centos/Debian,自动识别系统进行安装配置。[注意，经反馈，Centos 5 无法使用。]</li>
 <li>8. 自定义对连接客户端认证方式，支持白名单即支持某些IP/IP段无需认证即可连接。</li>
 </ul>
-<h3>******已解决问题</h3>
-<ul>
-<li>测试64位系统 centos 会出现认证失败 请添加一条命令 <code>cp /lib/security/pam_pwdfile.so /lib64/security/ </code></li>
-</ul>
 <h3>******未解决问题</h3>
 <ul>
 <li>1. 分析log对连接sock5的用户进行统计。</li>
